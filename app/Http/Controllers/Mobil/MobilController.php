@@ -11,26 +11,17 @@ class MobilController extends Controller
     //view dashboar
     public function index(Request $request)
     {
-        $query = mobil::query();
         $katakunci = $request->katakunci;
         $jumlah = 6;
-
-        // Filter berdasarkan model
-        if ($request->has('model')) {
-            $query->where('model', $request->input('model'));
-        }
-
-        // Filter berdasarkan nomor_plat
-        if ($request->has('nomor_plat')) {
-            $query->where('nomor_plat', $request->input('nomor_plat'));
-        }
+        
 
         if(strlen($katakunci)) {
             $data = mobil::where('merek', 'like', "%$katakunci%")
+            ->orwhere('model', 'like', "%$katakunci%")
+            ->orwhere('merek', 'like', "%$katakunci%")
+            ->orwhere('nomor_plat', 'like', "%$katakunci%")
             ->paginate($jumlah);
-        } 
-        
-        else {
+        } else {
             $data = mobil::orderBy('id', 'desc')->paginate($jumlah);
         }
         
