@@ -37,9 +37,6 @@
                         href="{{url('/'.$item->id.'/sewaMobil')}}"
                         >Sewa</a
                     >
-                    @else
-                    <a class="btn border-info text-border">Mobil sedang di pinjam</a>
-                    @endif
                     <a
                         class="btn border-info text-border my-2"
                         href="{{url('/'.$item->id.'/edit')}}"
@@ -52,6 +49,9 @@
                     >
                         @csrf @method('Delete')
                         <button class="submit btn btn-white p-1 y-1 text-danger">Delete</button>
+                    @else
+                    <a class="btn border-info text-border">Mobil sedang di pinjam</a>
+                    @endif
                     </form>
             </div>
         </div>
