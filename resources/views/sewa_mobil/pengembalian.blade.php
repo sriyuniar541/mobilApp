@@ -29,8 +29,13 @@
             <p><span class="fw-bold">Model mobil  : </span><br/> {{ $item->mobil->model }}</p>
             <p><span class="fw-bold">Nomor plat  : </span><br/> {{ $item->mobil->nomor_plat }}</p>
             <p><span class="fw-bold">Mulai sewa  : </span><br/> {{ $item->tgl_awal_sewa }}</p>
-            <p><span class="fw-bold">Rencana pengembalian  : </span><br/> {{ $item->tgl_akhir_sewa }}</p>
-
+            
+            @if ($item->pengembalian == 1)
+              <p><span class="fw-bold"> Pengembalian  : </span><br/> {{ $item->tgl_akhir_sewa }}</p>
+            @else
+              <p><span class="fw-bold">Rencana pengembalian  : </span><br/> {{ $item->tgl_akhir_sewa }}</p>
+            @endif
+           
             {{-- format harga --}}
             @php
               $integerValue = $item->mobil->sewa_perhari; 
