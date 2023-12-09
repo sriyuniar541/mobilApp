@@ -6,6 +6,17 @@
 
 
 <h5 class="text-secondary text-center mt-5">Daftar peminjaman mobil</h5>
+
+@if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $item)
+          <div class="alert alert-danger" role="alert">
+            {{ $item }}
+          </div>
+       @endforeach
+    </ul>
+@endif
+
 <div class="row">
 <div class="row justify-content-around ">
     @foreach ($data as $item)
@@ -96,6 +107,11 @@
 
                 <p><span class="fw-bold">Lama Hari sewa  :  </span><br/>{{ $lamaSewaMobil }} Hari</p>
                 <p><span class="fw-bold">Total bayar  :  </span><br/>Rp {{ $formatTotalPrice }}</p>
+
+                {{-- memastikan data mobil sesuai dengan yg dipinjam --}}
+                <p class="text-danger">* Silahkan input nomor plat mobil</p>
+                <input class="form-control" type="text" name="input_platNomor" required>
+
               </div>     
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

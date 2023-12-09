@@ -22,7 +22,8 @@ class PeminjamanController extends Controller
     }
 
     public function getPeminjaman (Request $request)
-    {        
+    {   
+       
         $data = peminjaman::with('mobil','users')->get();
         
         return view('sewa_mobil.pengembalian')->with('data', $data);
@@ -69,6 +70,7 @@ class PeminjamanController extends Controller
     
     public function update(Request $request , string $id )
     {    
+
         $dataSewa = peminjaman::where('id', $id )->first();
         $dataMobil = mobil::where('id', $dataSewa->mobil_id )->first();
         $data = peminjaman::all();
@@ -101,14 +103,26 @@ class PeminjamanController extends Controller
         $updateketersediaan = [
             'status' => 0
         ];
-        
-        mobil::where('id', $dataSewa->mobil_id )->update($updateketersediaan);        
- 
-        peminjaman::where('id', $id )->update($updatotalBayar);
-        
-        $request->session()->flash('success', 'Berhasil mengembalikan mobil');
 
-        return redirect ('/dashboard');
+        //mengecek apakah inputan sesuai dengan pesanan
+        $inputanDataUser = $request->input('input_platNomor');
+        
+        if ($inputanDataUser === $dataMobil->nomor_plat) {
+
+            mobil::where('id', $dataSewa->mobil_id )->update($updateketersediaan);        
+ 
+            peminjaman::where('id', $id )->update($updatotalBayar);
+        
+            $request->session()->flash('success', 'Berhasil mengembalikan mobil');
+
+            return redirect ('/dashboard');
+            
+        } else {
+
+            return back()->withErrors('Pengembalian dibatalkan. Data tidak cocok');
+        
+        }
+  
     } 
 
     public function deletePeminjaman(Request $request, string $id)
