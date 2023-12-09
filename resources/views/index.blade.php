@@ -66,21 +66,40 @@
                     </li>
 
                     @endif
-                    <li class="nav-item ">
+                    <li class="nav-item col-lg-6">
                         <form
-                            class="d-flex"
+                            class="d-flex "
                             role="search"
                             method="GET"
                             action="{{ url('dashboard') }}"
                         >
+                            {{-- search --}}
                             <input
                                 class="form-control me-2"
                                 type="search"
-                                placeholder="Search"
+                                placeholder="Search Merek"
                                 aria-label="Search"
                                 name="katakunci"
                                 value="{{Request::get('katakunci')}}"
                             />
+
+                            <input
+                                class="form-control me-2"
+                                type="search"
+                                placeholder="Model"
+                                aria-label="Search "
+                                name="model"
+                                value="{{Request::get('model')}}"
+                            />
+
+                            <input
+                                class="form-control me-2"
+                                type="search"
+                                placeholder=" Plat nomor"
+                                aria-label="Search "
+                                name="nomor_plat"
+                                value="{{Request::get('nomor_plat')}}"
+                            /> 
                             <button
                                 class="btn btn-outline-primary"
                                 type="submit"
@@ -103,3 +122,4 @@
         ></script>
     </body>
 </html>
+
