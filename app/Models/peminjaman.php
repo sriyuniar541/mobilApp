@@ -12,4 +12,16 @@ class peminjaman extends Model
         'users_id', 'mobil_id', 'tgl_awal_sewa', 'tgl_akhir_sewa', 'lama_sewa', 'total'
     ];
     protected $table = 'sewa_mobil';
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function mobil()
+    {
+        return $this->belongsTo(mobil::class);
+    }
+
+    
 }

@@ -3,7 +3,9 @@
 @if ($errors->any())
 <ul>
     @foreach ($errors->all() as $item)
-    <p>{{ $item }}</p>
+        <div class="alert alert-danger" role="alert">
+            {{ $item }}
+        </div>
     @endforeach
 </ul>
 @endif
@@ -55,7 +57,7 @@
 
     <div class="mb-3">
         <label for="exampleFormControlInput2" class="form-label"
-            >Tanggal pengembalian</label
+            >Rencana Tanggal pengembalian</label
         >
         <input
             type="date"

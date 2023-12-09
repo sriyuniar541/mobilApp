@@ -13,4 +13,9 @@ class User extends Authenticatable
         'email', 'password', 'fullname', 'alamat', 'nomor_sim', 'nomor_hp'
     ];
     protected $table = 'users';
+
+    public function peminjaman()
+    {
+        return $this->hasMany(peminjaman::class);
+    }
 }

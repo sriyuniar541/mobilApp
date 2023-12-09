@@ -23,14 +23,18 @@ class SessionController extends Controller
             'email'=>'required|email|unique:users,email',
             'password'=>'required|min:8',
             'fullname'=>'required',
-            'nomor_sim'=>'required'
+            'nomor_sim'=>'max:16',
+            'nomor_hp'=>'max:16',
         ], [
             'email.required' => 'Email wajib diisi',
             'email.unique' => 'Email sudah terdaftar',
             'password.required' => ' Password wajib diisi',
             'password.min' => ' Password minimal 8 karakter',
             'fullname.required' => ' Fullname wajib diisi',
-            'nomor_sim.required' => ' Wajib mempunyai dan memiliki SIM'
+            'nomor_sim.required' => ' Wajib mempunyai dan memiliki SIM',
+            'nomor_sim.max' => ' Nomor sim Maksimal 16 Karakter',
+            'nomor_hp.max' => ' Nomor Hp Maksimal 16 Karakter',
+            'nomor_hp.max' => 'Nomor Hp Maksimal 16 Karakter'
         ]);
 
         $data = [

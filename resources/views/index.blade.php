@@ -81,15 +81,6 @@
                                 name="katakunci"
                                 value="{{Request::get('katakunci')}}"
                             />
-                            {{-- <label for="category">Model:</label>
-                            <input  type="search"
-                            placeholder="Search"
-                            aria-label="Search"  name="model" id="model">
-                        
-                            <label for=>Nomor Plat:</label>
-                            <input  type="search"
-                            placeholder="Search"
-                            aria-label="Search" name="nomor_plat" id="nomor_plat"> --}}
                             <button
                                 class="btn btn-outline-primary"
                                 type="submit"
@@ -97,21 +88,6 @@
                                 Search
                             </button>
                         </form>
-
-<!-- resources/views/products/index.blade.php -->
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </li>
                 </ul>
             </div>

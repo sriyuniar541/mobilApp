@@ -12,7 +12,7 @@ class MobilController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlah = 6;
+        $jumlah = 8;
         
 
         if(strlen($katakunci)) {
@@ -82,7 +82,7 @@ class MobilController extends Controller
         $request->validate([
             'merek'=>'required',
             'model'=>'required',
-            'nomor_plat'=>'required|unique:mobil',
+            'nomor_plat'=>'required',
             'sewa_perhari'=>'required | numeric'
         ], [
             'merek.required' => 'Merek mobil wajib diisi',

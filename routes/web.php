@@ -40,7 +40,6 @@ Route::get('/{id}/edit', [MobilController::class, 'edit'])->middleware('isLogin'
 Route::put('/{id}/update', [MobilController::class, 'update']);
 
 //delete
-//update data
 Route::delete('/{id}/delete', [MobilController::class, 'destroy']);
 
 
@@ -55,6 +54,9 @@ Route::get('/getPeminjaman', [ PeminjamanController::class, 'getPeminjaman'])->m
 
 // penegembalian
 Route::put('/{id}/pengembalianMobil', [ PeminjamanController::class, 'update']);
+
+//update data
+Route::delete('/{id}/deletePeminjaman', [PeminjamanController::class, 'deletePeminjaman']);
 
 
 
