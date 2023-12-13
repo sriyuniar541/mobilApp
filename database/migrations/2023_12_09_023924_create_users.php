@@ -19,10 +19,9 @@ return new class extends Migration
             $table->string('alamat');
             $table->bigInteger('nomor_sim');
             $table->bigInteger('nomor_hp');
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));   
-
-
            
         });
     }

@@ -22,6 +22,7 @@
                     class="form-control"
                     name="email"
                     id="email"
+                    value="{{ old('email') }}"
                 />
             </div>
         </div>

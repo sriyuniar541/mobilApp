@@ -32,6 +32,8 @@
                         >
                     </li>
                     
+                    @if (Auth::check())
+
                     <li class="nav-item">
                         <a
                             class="nav-link active"
@@ -47,8 +49,6 @@
                         >
                     </li>
 
-                    @if (Auth::check())
-
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('users/profile') }}"
                             >Profile</a
@@ -60,12 +60,7 @@
                             >logout</a
                         >
                     </li>
-                    @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('login') }}">login</a>
-                    </li>
-
-                    @endif
+                    
                     <li class="nav-item col-lg-6">
                         <form
                             class="d-flex "
@@ -107,6 +102,9 @@
                                 Search
                             </button>
                         </form>
+                        
+                        @endif
+
                     </li>
                 </ul>
             </div>

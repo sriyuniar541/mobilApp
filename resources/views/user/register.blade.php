@@ -22,6 +22,7 @@
                     class="form-control"
                     name="email"
                     id="email"
+                    value="{{ old('email') }}"
                 />
             </div>
         </div>
@@ -50,6 +51,7 @@
                     class="form-control"
                     name="fullname"
                     id="fullname"
+                    value="{{ old('fullname') }}"
                 />
             </div>
         </div>
@@ -62,6 +64,7 @@
                     class="form-control"
                     name="alamat"
                     id="alamat"
+                    value="{{ old('alamat') }}"
                 />
             </div>
         </div>
@@ -76,6 +79,7 @@
                     class="form-control"
                     name="nomor_sim"
                     id="nomor_sim"
+                    value="{{ old('nomor_sim') }}"
                 />
             </div>
         </div>
@@ -90,6 +94,7 @@
                     class="form-control"
                     name="nomor_hp"
                     id="nomor_hp"
+                    value="{{ old('nomor_hp') }}"
                 />
             </div>
         </div>

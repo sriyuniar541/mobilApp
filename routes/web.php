@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Mobil\MobilController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\user\SessionController;
@@ -18,23 +19,29 @@ use App\Http\Middleware\isLogin;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect ('/dashboard');
 });
 
 
 
 // 1. CRUD MOBIL__________________
 
-// view dasboard dan get data mobil
-Route::get('/dashboard', [MobilController::class, 'index']) ->name('admin.dashboard.index');
-//view halaman add mobil
-Route::get('/addMobil', [MobilController::class, 'AddMobil']) ->name('addMobil')->middleware('isLogin');
+// view dasboard
+Route::get('/dashboard', [MobilController::class, 'index']) 
+        ->name('admin.dashboard.index')
+        ->middleware(['isLogin', 'verified']);
+
+//view add mobil
+Route::get('/addMobil', [MobilController::class, 'AddMobil']) 
+        ->name('addMobil')
+        ->middleware(['isLogin', 'verified']);
 
 //insert mobil
 Route::post('/insert', [MobilController::class, 'store']);
 
 //view update data
-Route::get('/{id}/edit', [MobilController::class, 'edit'])->middleware('isLogin');
+Route::get('/{id}/edit', [MobilController::class, 'edit'])
+        ->middleware(['isLogin', 'verified']);
 
 //update data
 Route::put('/{id}/update', [MobilController::class, 'update']);
@@ -45,12 +52,14 @@ Route::delete('/{id}/delete', [MobilController::class, 'destroy']);
 
 
 //2. CRUD PEMINJAMAN____________
-Route::get('/{id}/sewaMobil', [ PeminjamanController::class, 'index'])->middleware('isLogin');
+Route::get('/{id}/sewaMobil', [ PeminjamanController::class, 'index'])
+        ->middleware(['isLogin', 'verified']);
 
 Route::post('/peminjaman', [ PeminjamanController::class, 'insert']);
 
 //view peminjaman by user
-Route::get('/getPeminjaman', [ PeminjamanController::class, 'getPeminjaman'])->middleware('isLogin');
+Route::get('/getPeminjaman', [ PeminjamanController::class, 'getPeminjaman'])
+        ->middleware(['isLogin', 'verified']);
 
 // penegembalian
 Route::put('/{id}/pengembalianMobil', [ PeminjamanController::class, 'update']);
@@ -66,10 +75,26 @@ Route::delete('/{id}/deletePeminjaman', [PeminjamanController::class, 'deletePem
 Route::get('/register', [ SessionController::class, 'index']);
 
 //view page register
-Route::get('/login', [ SessionController::class, 'viewLogin']);
+Route::get('/login', [ SessionController::class, 'viewLogin'])
+        ->name('login');
 
 //register
 Route::post('/users/register', [ SessionController::class, 'register']);
+
+//verify email
+
+Route::get('/email/verify', function () { return view('auth.verify-email');})
+        ->middleware('auth')
+        ->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+ 
+        return redirect('/dashboard');
+
+})
+        ->middleware(['auth', 'signed'])
+        ->name('verification.verify');
 
 //login
 Route::post('/users/login', [ SessionController::class, 'login']);
@@ -77,5 +102,6 @@ Route::post('/users/login', [ SessionController::class, 'login']);
 //logout
 Route::get('/users/logout', [ SessionController::class, 'logout']);
 
-//profile
-Route::get('/users/profile', [ SessionController::class, 'profile'])->middleware('isLogin');
+//view profile
+Route::get('/users/profile', [ SessionController::class, 'profile'])
+        ->middleware(['isLogin', 'verified']);
